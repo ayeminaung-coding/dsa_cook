@@ -24,7 +24,7 @@ public class Tree {
 
     // is current node a root?
     public boolean isRoot(int p) {
-        if (T[0] == p) {
+        if (p == 0) {
             return true;
         } else {
             return false;
@@ -166,7 +166,7 @@ public class Tree {
 
     public int getSibling(int p) {
         if (isRoot(p)) {
-            return -999; // Root has no sibling
+            return -999; // Root has no sibling   
         } else if (p % 2 == 1) {// p is left child , then find right child of the same parent
             if (T[p + 1] > -1) {
                 return T[p + 1];

@@ -1,20 +1,18 @@
 public class DiGraph {
-    private final int MAX_VERTICES = 20; // allow only 20 vertices
-    private char[] vertex; // list of vertices
-    private int[][] adjMatrix; // adjacency matrix
-    private int numVertices; // number of vertices
+    private final int MAX_VERTICES = 20;
+    private char[] vertex ;
+    private int[][] adjMatrix;
+    private int numVertices;
     private int numEdges;
 
-    // default constructor
-    public DiGraph() {
-        // create vertex objects
+
+    public DiGraph(){
         vertex = new char[MAX_VERTICES];
-        // create adjacency matrix objects
         adjMatrix = new int[MAX_VERTICES][MAX_VERTICES];
         numVertices = 0;
         numEdges = 0;
 
-        // set all elements of adjacency matrix to be zero (no edges)
+
         for (int i = 0; i < MAX_VERTICES; i++) {
             for (int j = 0; j < MAX_VERTICES; j++) {
                 adjMatrix[i][j] = 0;
@@ -22,35 +20,31 @@ public class DiGraph {
         }
     }
 
-    // add new vertex with title
-    public void addVertex(char title) {
+    public void addVertex(char title){
         vertex[numVertices++] = title;
     }
 
-    // add edge between two vertices
-    public void addEdge(int start, int end, int weight) {
-        // set value in adjacency matrix
-        adjMatrix[start][end] = weight;
-        numEdges++;
+    public void addEdge(int start, int end){
+        adjMatrix[start][end] = 1;
+        numEdges++; 
     }
 
-    // graph's size
-    public void showSize() {
-        System.out.println("Size of graph = " + numVertices);
-        System.out.println();
+
+    public void showSize(){
+        System.out.println("Size of graph = ");
+    
     }
 
-    // display each vertex's title
-    public void showVertex() {
+
+    public void showVertex(){
         System.out.println("=== Vertexes ===");
-        for (int i = 0; i < vertex.length; i++) {
+        for (int i = 0; i < vertex.length ; i++) {
             System.out.print(vertex[i] + " ");
         }
-        System.out.println("\n");
     }
 
-    // display adjacency matrix
-    public void showAdjacency() {
+
+    public void showAdjacency(){
         System.out.println("=== Adjacency Matrix ===");
         for (int i = 0; i < numVertices; i++) {
             for (int j = 0; j < numVertices; j++) {
@@ -59,38 +53,33 @@ public class DiGraph {
             System.out.println();
         }
         System.out.println("");
-
     }
 
-    // display all edges
-    public void showEdge() {
+
+    public void showEdge(){
         System.out.println("=== Edges ===");
-        System.out.println("Number of edges = " + numEdges);
+        System.out.println("Number of edges = "+ numEdges);
         for (int i = 0; i < numVertices; i++) {
-            for (int j = 0; j < numVertices; j++) {
-                if (adjMatrix[i][j] > 0) {
-                    System.out.print(vertex[i] + "-" +
-                            vertex[j] + "(" + adjMatrix[i][j] + ") ");
+            for (int j = i; j < numVertices; j++) {
+                if (adjMatrix[i][j] == 1) {
+                    System.out.print(vertex[i] + "-" + vertex[j] + " ");
                 }
             }
         }
-        System.out.println("\n");
     }
 
-    // check if the graph complete?
-    public void checkComplete() {
-        int complete = numVertices * (numVertices - 1);
-        if (numEdges == complete) {
+    public void checkComplete(){
+        int complete = numVertices * (numVertices -1 )/2;
+        if(numEdges == complete){
             System.out.println("This graph is a Complete Graph");
         } else {
             System.out.println("This graph is NOT a complete graph\n");
         }
     }
 
-    // compute path length
-    public int findPathLength(int[] path) {
+    public int findPathLength(int[] path){
         int pathlength = 0;
-        for (int i = 0; i < path.length - 1; i++) {
+        for(int i = 0; i< path.length -1 ; i++){
             int start = path[i];
             int end = path[i + 1];
             pathlength += adjMatrix[start][end];
@@ -98,6 +87,13 @@ public class DiGraph {
         return pathlength;
     }
 
+
+    // add edge between two vertices
+    public void addEdge(int start, int end, int weight) {
+        // set value in adjacency matrix
+        adjMatrix[start][end] = weight;
+        numEdges++;
+    }
     
     public static void main(String[] args) {
         DiGraph graph = new DiGraph();
@@ -141,3 +137,4 @@ public class DiGraph {
     }
 
 }
+
