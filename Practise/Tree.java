@@ -115,19 +115,56 @@ public class Tree {
 
     public void addChild(int p, int element) {
         // Child adding logic removed
-        if(   )
+        if(element > T[p]){
+            if(hasLeftChild(p)){
+                addChild(2 * p + 1, element);
+            }else{
+                T[(2*p) + 1] = element;
+                size++;
+                System.out.println("Left child of " + p + " was added");
+            }
+        }else{
+            if(hasRightChild(p)){
+                addChild(2 * p + 2, element);
+            }else{
+                T[(2*p) + 2] = element;
+                size++;
+                System.out.println("Right child of " + p + " was added");
+            }
+        }
     }
 
     public int getLeftChild(int p) {
+        if(hasLeftChild(p)){
+            return T[(2*p) + 1];
+        }
         return -999; // Return appropriate value for left child
     }
 
     public int getRightChild(int p) {
+        if(hasRightChild(p)){
+            return T[(2*p) + 2];
+        }
         return -999; // Return appropriate value for right child
     }
 
     public int getSibling(int p) {
-        return -999; // Return appropriate value for sibling
+        if(isRoot(p)){
+            return -999; // Return appropriate value for sibling
+        }else{
+            if(p % 2 == 1){
+                //left child
+                if(T[p+1] > -1){
+                    return T[p + 1];
+                }
+            }else if(p%2 == 0){
+                //right child
+                if(T[p-1] > -1){
+                    return T[p -1];
+                }
+            }
+        }
+        return -999; // Return -999 if no sibling exists
     }
 
     public static void main(String[] args) {
@@ -152,7 +189,18 @@ public class Tree {
         abt.printAllElements();
         System.out.println();
 
-        // Other print statements removed for simplicity
+        System.out.println("The value in root node = " + abt.getElement(0));
+        System.out
+                .println("Node 1 contains " + abt.getElement(1) + " and it is an internal node: " + abt.isInternal(1));
+        System.out.println("Node 3 contains " + abt.getElement(3) + " and it is a leaf node: " + abt.isLeaf(3));
+        System.out.println("Node 6 contains " + abt.getElement(6) + ", its left child value = " + abt.getLeftChild(6)
+                + " and its right child value = " + abt.getRightChild(6));
+        System.out.println("Node 2 contains " + abt.getElement(2) + " and its sibling value = " + abt.getSibling(2));
+        System.out.println("Node 29 contains " + abt.getElement(29) + " and its parent value = "
+                + abt.getElement(abt.getParent(29)));
+
+        System.out.println();
+        System.out.println("Finally the tree's size = " + abt.getsize());
         keyboard.close();
     }
 }

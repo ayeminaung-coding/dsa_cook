@@ -1,4 +1,3 @@
-package Practise;
 public class MergeSort {
     public static void main(String[] args){
         int[ ] data = {77,44,99,66,33,55,88,22};
